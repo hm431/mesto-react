@@ -1,6 +1,6 @@
-import { Children } from "react";
 
-function PopupWithForm({title, name, children, isOpen, onClose}){
+
+function PopupWithForm({title, name, buttonText, children, isOpen, onClose}){
 
 
 
@@ -10,7 +10,10 @@ function PopupWithForm({title, name, children, isOpen, onClose}){
         <div className="popup__container popup__container_edit">
             <button type="button" onClick={onClose} className={`popup__close popup__close_${name}`}></button>
             <h2 className="popup__header">{title}</h2>
-            {children}
+            <form action="#" method="get"  className="popup__form" noValidate>
+                {children}
+                <button type="submit" className={`popup__save popup__save_${name}`}>{buttonText}</button>
+            </form>
         </div>
 
     </div>

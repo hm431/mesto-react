@@ -20,7 +20,10 @@ function Main({onCardClick, onEditProfile, onAddPlace, onEditAvatar}){
         changeUserName(info.name);
         changeUserDescription(info.about);
         changeUserAvatar(info.avatar);
-    });
+    })
+    .catch((err)=>{             //попадаем сюда если один из промисов завершится ошибкой 
+        console.log(err);
+         })
 
   
 
@@ -28,7 +31,10 @@ function Main({onCardClick, onEditProfile, onAddPlace, onEditAvatar}){
     api.getCards()
     .then((list)  =>{
         changeCardsArray(list);
-    });
+    })
+    .catch((err)=>{             //попадаем сюда если один из промисов завершится ошибкой 
+        console.log(err);
+         });
 }, []);
 
 
@@ -55,7 +61,7 @@ function Main({onCardClick, onEditProfile, onAddPlace, onEditAvatar}){
 
         <section className="elements">
          { cards.map(card =>(
-                <Card onCardClick={onCardClick} card={card}/>
+                <Card key={card._id} onCardClick={onCardClick} card={card}/>
                 ))}
         </section>
     </main>

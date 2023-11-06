@@ -5,10 +5,12 @@ function Card({onCardClick, card}){
         onCardClick(card);
       }  
 
+
+
     return(
        
             <div className="element">
-                <img src={card.link} alt="Изображение места" className="element__img" onClick={handleClick} />
+                <img src={card.link} alt={card.name} className="element__img" onClick={handleClick} />
                 <button className="element__delite"></button>
                 <div className="element__text">
                     <h2 className="element__header">{card.name}</h2>
