@@ -73,7 +73,7 @@
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: avatarLink
+        avatar: avatarLink.avatar
       })
     })
       .then((response) => this.onError(response))
@@ -85,8 +85,8 @@
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name: profilData.popupName,
-        about: profilData.popupStatus
+        name: profilData.name,
+        about: profilData.about
       })
     })
       .then((response) => this.onError(response))
