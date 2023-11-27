@@ -1,10 +1,17 @@
-function Footer(){
-    return(
+function Footer() {
+
+    let year = '2023';
+    const currentYear = new Date().getFullYear();
+    if (currentYear !== 2023) {
+        year = `2023 - ${currentYear}`;
+    }
+
+    return (
         <footer className="footer">
-        <p className="footer__copiright">
-            © 2020 Mesto Russia
-        </p>
-    </footer>
+            <p className="footer__copiright">
+                © {year} Mesto Russia
+            </p>
+        </footer>
     );
 }
 

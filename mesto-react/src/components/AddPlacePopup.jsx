@@ -1,34 +1,34 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
-function AddPlacePopup({ isOpen, onClose, onUpdateCard}) {
+function AddPlacePopup({ isOpen, onClose, onUpdateCard }) {
 
 
     const [name, setNameCard] = React.useState('');
     const [link, setlink] = React.useState('');
 
-    function handleChangeName(e){
+    function handleChangeName(e) {
         setNameCard(e.target.value);
     }
 
 
-    function handleChangeImage(e){
+    function handleChangeImage(e) {
         setlink(e.target.value);
     }
 
 
     function handleSubmit(e) {
-        
+
         // Запрещаем браузеру переходить по адресу формы
         e.preventDefault();
-      
+
         // Передаём значения управляемых компонентов во внешний обработчик
         onUpdateCard({
-          name,
-          link: link,
-          likes: [],
+            name,
+            link: link,
+            likes: [],
         });
-      }
+    }
 
 
 
@@ -42,12 +42,12 @@ function AddPlacePopup({ isOpen, onClose, onUpdateCard}) {
             onSubmit={handleSubmit}>
 
             <input type="text" name="popupName" placeholder="Название" className="popup__input popup__input_place_text"
-                required minLength="2" id="text" onChange={handleChangeName}/>
+                required minLength="2" id="text" onChange={handleChangeName} value={name} />
 
             <span className="popup__error  popup__error_text "></span>
 
             <input type="url" name="popupStatus" placeholder="Ссылка на картинку"
-                className="popup__input popup__input_place_link" id="url" required onChange={handleChangeImage}/>
+                className="popup__input popup__input_place_link" id="url" required onChange={handleChangeImage} value={link} />
 
             <span className="popup__error  popup__error_url"></span>
         </PopupWithForm>

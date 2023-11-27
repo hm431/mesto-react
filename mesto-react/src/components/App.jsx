@@ -173,17 +173,9 @@ function App() {
 
 
     return (
-
-
-
-
         <CurrentUserContext.Provider value={currentUser}>
-
-
             <div className="page">
-
                 <Header />
-
                 <Main
                     onCardClick={handleCardClick}
                     onDeliteClick={handleDeliteClick}
@@ -192,40 +184,26 @@ function App() {
                     onEditAvatar={handleEditAvatarClick}
                     onCardLike={handleCardLike}
                 >
-
-
                     <section className="elements">
                         {cards.map(card => (
                             <Card key={card._id} onCardClick={handleCardClick} onCardDelete={handleDeliteClick} card={card} onCardLike={handleCardLike} />
                         ))}
                     </section>
                 </Main>
+
                 <Footer />
 
-
-
                 <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-
+               
                 <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onUpdateCard={handleAddPlaceSubmit} />
-
-
-
-
-
-
-
+               
                 <DeliteCardPopup isOpen={isDelitePopupOpen} onClose={closeAllPopups} handleCardDelete={handleCardDelete} card={isDelitePopupOpen} />
-
-
+               
                 <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
-
+               
                 <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-
             </div>
         </CurrentUserContext.Provider>
-
-
-
     );
 }
 
@@ -233,41 +211,3 @@ export default App;
 
 
 
-/*
-<PopupWithForm
-title="Обновить аватар"
-name="avatar"
-buttonText="Создать"
-isOpen={isEditAvatarPopupOpen}
-onClose={closeAllPopups}>
-
-<input type="url" name="popupStatus" placeholder="Ссылка на картинку"
-    className="popup__input popup__input_avatar_link" id="avatar-link" required />
-<span className="popup__error  popup__error_avatar-link"></span>
-
-</PopupWithForm> 
-
-
-
-
-   <PopupWithForm
-                    title="Новое место"
-                    name="place"
-                    buttonText="Сохранить"
-                    isOpen={isAddPlacePopupOpen}
-                    onClose={closeAllPopups}>
-
-
-                    <input type="text" name="popupName" placeholder="Название" className="popup__input popup__input_place_text"
-                        required minLength="2" id="text" />
-
-                    <span className="popup__error  popup__error_text "></span>
-
-                    <input type="url" name="popupStatus" placeholder="Ссылка на картинку"
-                        className="popup__input popup__input_place_link" id="url" required />
-
-                    <span className="popup__error  popup__error_url"></span>
-
-                </PopupWithForm>
-
-                */
