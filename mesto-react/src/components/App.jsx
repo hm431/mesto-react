@@ -20,7 +20,7 @@ function App() {
 
     const [isDelitePopupOpen, changeDelitePopupOpen] = React.useState(null);
     const [selectedCard, changeSelectedCard] = React.useState(null);
-   
+
 
     //создвние стейта currentUser
     const [currentUser, changeCurrentUser] = React.useState({});
@@ -49,7 +49,7 @@ function App() {
     }
 
     function handleDeliteClick(card) {
-       // console.log(card);
+        // console.log(card);
         changeDelitePopupOpen(card);
     }
 
@@ -96,24 +96,26 @@ function App() {
 
     function handleCardDelete(card) {
 
-        
+
         api.deliteCards(card._id)
-        .then(() => {
-            changeCardsArray((cards) => cards.filter((c) => c._id !== card._id))
-            closeAllPopups();        
+            .then(() => {
+                changeCardsArray((cards) => cards.filter((c) => c._id !== card._id))
+                closeAllPopups();
             })
             .catch((err) => {             //попадаем сюда если один из промисов завершится ошибкой 
                 console.log(err);
             })
 
-        
+
     }
 
     function handleUpdateUser(UserInfoChange) {
         console.log(UserInfoChange);
         api.editProfil(UserInfoChange)
-            .then(() => {
+            .then((UserInfoChange) => {
                 changeCurrentUser(UserInfoChange);
+                closeAllPopups();
+                console.log(currentUser);
             })
             .catch((err) => {             //попадаем сюда если один из промисов завершится ошибкой 
                 console.log(err);
@@ -123,10 +125,12 @@ function App() {
 
 
     function handleUpdateAvatar(UserAvatarChange) {
-        console.log(UserAvatarChange);
+
         api.editAvatar(UserAvatarChange)
-            .then(() => {
+            .then((UserAvatarChange) => {
                 changeCurrentUser(UserAvatarChange);
+                closeAllPopups();
+
             })
             .catch((err) => {             //попадаем сюда если один из промисов завершится ошибкой 
                 console.log(err);
@@ -134,34 +138,36 @@ function App() {
     }
 
     function handleAddPlaceSubmit(newCard) {
-        console.log(newCard);
+
         api.addCards(newCard)
             .then((newCard) => {
-             //   changeCurrentUser(UserAvatarChange);
-             changeCardsArray([newCard, ...cards]);
+                //   changeCurrentUser(UserAvatarChange);
+                changeCardsArray([newCard, ...cards]);
+                closeAllPopups();
+
             })
             .catch((err) => {             //попадаем сюда если один из промисов завершится ошибкой 
                 console.log(err);
-            }) 
+            })
     }
 
 
-  
+
 
     const [cards, changeCardsArray] = React.useState([]);
 
-    useEffect(() =>{    
+    useEffect(() => {
 
 
-    
-    api.getCards()
-    .then((list)  =>{
-        changeCardsArray(list);
-    })
-    .catch((err)=>{             //попадаем сюда если один из промисов завершится ошибкой 
-        console.log(err);
-         });
-}, []);
+
+        api.getCards()
+            .then((list) => {
+                changeCardsArray(list);
+            })
+            .catch((err) => {             //попадаем сюда если один из промисов завершится ошибкой 
+                console.log(err);
+            });
+    }, []);
 
 
 
@@ -185,30 +191,30 @@ function App() {
                     onAddPlace={handleAddPlaceClick}
                     onEditAvatar={handleEditAvatarClick}
                     onCardLike={handleCardLike}
-                />
+                >
 
 
-                <section className="elements">
-                    {cards.map(card => (
-                        <Card key={card._id} onCardClick={handleCardClick} onCardDelete={handleDeliteClick} card={card} onCardLike={handleCardLike} />
-                    ))}
-                </section>
-
+                    <section className="elements">
+                        {cards.map(card => (
+                            <Card key={card._id} onCardClick={handleCardClick} onCardDelete={handleDeliteClick} card={card} onCardLike={handleCardLike} />
+                        ))}
+                    </section>
+                </Main>
                 <Footer />
 
 
 
                 <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-                
-                <AddPlacePopup  isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onUpdateCard={handleAddPlaceSubmit}/>
+
+                <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onUpdateCard={handleAddPlaceSubmit} />
 
 
-             
 
 
-                
 
-                <DeliteCardPopup isOpen={isDelitePopupOpen} onClose={closeAllPopups} handleCardDelete={handleCardDelete} card={isDelitePopupOpen}/>
+
+
+                <DeliteCardPopup isOpen={isDelitePopupOpen} onClose={closeAllPopups} handleCardDelete={handleCardDelete} card={isDelitePopupOpen} />
 
 
                 <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />

@@ -1,9 +1,9 @@
 import { api } from "../utils/Api";
-import React, { useEffect } from "react";
+import React, { Children, useEffect } from "react";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function Main({onCardClick, onEditProfile, onAddPlace, onEditAvatar, onDeliteClick,  onCardLike}){
+function Main({onCardClick, onEditProfile, onAddPlace, onEditAvatar, onDeliteClick,  onCardLike, children}){
     const userContext = React.useContext(CurrentUserContext);
          
     /*const [cards, changeCardsArray] = React.useState([]);
@@ -42,8 +42,8 @@ function Main({onCardClick, onEditProfile, onAddPlace, onEditAvatar, onDeliteCli
             <button type="button" onClick={onAddPlace} className="profile__add-button"></button>
 
         </section>
-
-
+        {children}
+        
     </main>
     );
 }
